@@ -56,3 +56,13 @@ if cfg.HasSection(flag) {
 }
 fmt.Println(TOPIC)
 ```
+
+# 另外
+参考的https://github.com/larspensjo/config
+
+原项目有以下几个点不符合读取fluent-bit配置文件格式
+-   支持的分隔符为“:”或者“=”，没有“ ”
+-   value部分内容不支持空格
+-   只支持读取文件，不支持读取字符串
+
+因此对代码做了部分修改
