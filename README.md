@@ -32,13 +32,27 @@
 
 ## 读取文件
 ```
-  cfg := iniconfig.NewDefault()
-  file, err := os.Open(fname)
-  cfg.Read(bufio.NewReader(file))
+  file := "./config.ini"
+  cfg, err := iniconfig.ReadDefault(file)
 ```
 ## 读取字符串
 ```
   cfg := iniconfig.NewDefault()
   cfg.Read(bufio.NewReader(strings.NewReader(str)))
 ```
-  
+## 构造map
+```
+flag := "INPUT"
+if cfg.HasSection(flag) {
+    section, err := cfg.SectionOptions(flag)
+    if err == nil {
+        for _, v := range section {
+            options, err := cfg.String(flag, v)
+            if err == nil {
+                TOPIC[v] = options
+            }
+        }
+    }
+}
+fmt.Println(TOPIC)
+```
